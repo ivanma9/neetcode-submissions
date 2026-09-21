@@ -1,0 +1,32 @@
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        # finding the max difference
+        '''
+        between 2 stocks 
+        I would rather choose the smaller stock to buy
+        unless last index
+
+        if last index (eith sell now or shouldve sold before)
+        
+        approach one save minimum up to index i
+        and max up to max from n-1 backwards
+
+        10 1 1 1 1 1
+        10 7 7 7 7 1
+
+        max - min
+
+'''
+        n = len(prices)
+        maxs = [prices[n-1]] * n
+        mins = [prices[0]] * n
+        profit = 0
+        for i in range(1,n):
+            mins[i] = min(mins[i-1], prices[i])
+        for i in range(n-2,-1,-1):
+            maxs[i] = max(maxs[i+1], prices[i])
+        for i in range(n):
+            profit = max(profit, maxs[i] -mins[i])
+        print(maxs)
+        print(mins)
+        return profit
